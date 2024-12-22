@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.senvu.train.business.mapper.ConfirmOrderMapper">
+
+    <!-- 查询使用 select标签
+            id = 方法名
+            resultType = 返回值类型
+            标签内编写SQL语句
+     -->
+    <!-- 动态值 -> #{key} 
+    动态的列名 容器名 关键字 ->  
+    -->
+
+
+    <insert id="insertConfirmOrder" parameterType="map">
+        insert into confirm_order (id,member_id, date, train_code, start, end, daily_train_ticket_id, tickets, status, create_time, update_time)
+        values (#{confirmOrder.id},#{confirmOrder.memberId},#{confirmOrder.date},#{confirmOrder.trainCode},#{confirmOrder.start},#{confirmOrder.end},#{confirmOrder.dailyTrainTicketId},#{json},#{confirmOrder.status},#{confirmOrder.createTime},#{confirmOrder.updateTime})
+    </insert>
+    <update id="updateConfirmOrderById" parameterType="com.senvu.train.business.pojo.entity.ConfirmOrder">
+        update confirm_order
+        <set>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="lineNumber != null">
+                line_number = #{lineNumber},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

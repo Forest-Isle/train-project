@@ -1,0 +1,33 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /business
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_business?serverTimezone=Asia/Shanghai
+    username: train_business
+    password: 12306Train@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: business
+  cloud:
+    nacos:
+      server-addr: 172.17.0.3:8848
+logging:
+  level:
+    com.senvu.train.business.admin.mapper: trace
+mybatis-plus:
+  configuration:
+    #开启驼峰命名自动映射
+    map-underscore-to-camel-case: true
+    #开启日志打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.senvu.train.Station.pojo
+  #扫描mapper文件
+  mapper-locations: classpath:mapper/*.xml

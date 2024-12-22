@@ -1,0 +1,21 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /batch
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: train_batch
+    password: 12306Train@
+    url: jdbc:mysql://localhost:3306/db_batch
+  application:
+    name: batch
+  cloud:
+    nacos:
+      server-addr: 172.17.0.3:8848
+business:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

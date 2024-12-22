@@ -1,0 +1,102 @@
+POST http://localhost:8082/member/passenger/save
+Content-Type: application/json
+token: {{token}}
+
+{
+  "name": "ming",
+  "memberId": "123",
+  "idCard": "123",
+  "type": "1"
+}
+
+###
+POST http://localhost:8082/member/passenger/save
+Content-Type: application/json
+token: {{token}}
+
+{
+  "id": "1866684145934143488",
+  "name": "zhang",
+  "memberId": "12345",
+  "idCard": "999",
+  "type": "2"
+}
+
+
+###
+
+POST http://localhost:8082/member/sendCode
+Content-Type: application/json
+
+{
+  "mobile": "12345678910"
+}
+
+###
+GET http://localhost:8082/business/admin/station/query-all
+#token: {{token}}
+Accept: application/json
+
+###
+
+POST http://localhost:8082/member/login
+Content-Type: application/json
+
+{
+  "mobile": "12345678910",
+  "code": "8888"
+}
+
+> {%
+    client.log(JSON.stringify(response.body));
+    client.log(JSON.stringify(response.body.data.token));
+    client.global.set("token", response.body.data.token)
+%}
+
+###
+POST http://localhost:8082/batch/admin/job/add
+Content-Type: application/json
+
+{
+  "name": "com.senvu.train.batch.TestTask",
+  "cronExpression": "*/2 * * * * ?",
+  "group": "default",
+  "description": "test job"
+}
+
+###
+GET http://localhost:8088/business/admin/daily-train/gen-daily/2024-12-01
+Accept: application/json
+
+###
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+
+{
+  "name": "com.senvu.train.batch.job.DailyTrainCarriageJob",
+  "group": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "description": "test job"
+}
+
+###
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+
+{
+  "name": "com.senvu.train.batch.TestTask",
+  "group": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "description": "test job"
+}
+
+###
+POST http://localhost:8082/batch/admin/job/delete
+Content-Type: application/json
+
+{
+  "name": "com.senvu.train.batch.TestTask",
+  "group": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "description": "test job"
+}
